@@ -1,0 +1,13 @@
+{
+  "author": "",
+  "name": "flint-app-hangout",
+  "repository": "https://github.com/hangout",
+  "description": "",
+  "version": "1.0.0",
+  "main": "",
+  "scripts": {},
+  "dependencies": {
+    "firebase": "^2.3.2"
+  },
+  "installed": []
+}
