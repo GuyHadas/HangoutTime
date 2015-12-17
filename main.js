@@ -23,6 +23,11 @@ window.logout = () => {
 view Main {
   let authUser
 
+  const getRandomInt = (min, max) => {
+    return Math.floor(Math.random() * (max - min) + min)
+  }
+
+
   ref.onAuth(authData => {
     if(authData) {
       let userRef = ref.child('users').child(authData.uid)
@@ -31,7 +36,9 @@ view Main {
         email: authData.facebook.email || null,
         displayName: authData.facebook.displayName,
         photoUrl: authData.facebook.profileImageURL,
-        facebookProfileUrl: authData.facebook.cachedUserProfile.link
+        facebookProfileUrl: authData.facebook.cachedUserProfile.link,
+        xPos: getRandomInt(0, 2000),
+        yPos: getRandomInt(50, 1000)
       }
 
       authUser = Object.assign({uid: authData.uid}, newUserFields)
@@ -56,7 +63,7 @@ view Main {
   })
 
   <Navbar authUser={authUser}/>
-  <HangoutMap />
+  <HangoutMap authUser={authUser}/>
 
 
 }

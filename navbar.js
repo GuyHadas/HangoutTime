@@ -3,10 +3,14 @@ view Navbar {
   <User authUser={view.props.authUser}/>
 
   $ = {
-    backgroundColor: 'rgba(27, 218, 175, 0.19)',
+    background: 'rgba(146, 227, 209, 1)',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',
+    height: 50,
+    position: 'fixed',
+    zIndex: 1,
+    width: '100%'
   }
 
   $Comment = {

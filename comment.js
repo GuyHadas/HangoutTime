@@ -38,7 +38,7 @@ view Comment {
     borderRadius: 8,
     paddingLeft: 5,
     height: 30,
-    border: '1px solid rgba(119, 198, 217, 0.45)',
+    border: '1px solid rgba(68, 139, 134, 0.29)',
     overflow: 'scroll'
   }
 
@@ -48,7 +48,7 @@ view Comment {
     fontWeight: 'bold',
     backgroundColor: 'rgba(125, 177, 82, 0.01)',
     borderRadius: 10,
-    border: '3px solid #ccc',
+    border: '3px solid rgba(68, 139, 134, 0.29)',
     cursor: 'pointer',
   }
 

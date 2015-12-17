@@ -2,21 +2,15 @@ view HangoutMap {
 
 
   <arena>
+    <Avatar authUser={view.props.authUser}/>
   </arena>
 
   $arena = {
-    position: 'fixed',
-    height: '100%',
-    width: '100%',
-    background: '#ccc',
-    border: 'solid 1px black'
+    position: 'absolute',
+    top: 50,
+    height: 1000,
+    width: 2000,
+    background: 'rgba(68, 139, 134, 0.29)',
+   }
 
-  }
-
-  $button = {
-    width: 100,
-    height: 35,
-    borderRadius: 10,
-    background: 'yellow'
-  }
 }
