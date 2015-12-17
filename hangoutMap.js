@@ -2,7 +2,7 @@ view HangoutMap {
 
 
   <arena>
-    <Avatar authUser={view.props.authUser}/>
+    <Avatar if={view.props.authUser} authUser={view.props.authUser}/>
   </arena>
 
   $arena = {

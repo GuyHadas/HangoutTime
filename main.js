@@ -67,15 +67,3 @@ view Main {
 
 
 }
-
-
-/*
-user {
-  x:
-  y:
-  message:
-  picUrl:
-  updateTimestamp:
-  createTimestamp:
-}
-*/

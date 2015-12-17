@@ -1,15 +1,15 @@
 view Avatar {
   let x, y
+  let user
 
   let uid = view.props.authUser.uid
 
-  let userRef = ref.child('users').child(uid)
-
-  userRef.on("value", (userSnapshot) => {
+  let userRef = ref.child('users').child(uid).on("value", (userSnapshot) => {
     user = userSnapshot.val()
     x = user.xPos
     y = user.yPos
   })
+
 
 
   <avatarPic-img src={view.props.authUser.photoUrl}></avatarPic-img>
