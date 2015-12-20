@@ -43,11 +43,12 @@ view User {
   }
 
   $name = {
-    marginLeft: 10,
-    marginRight: 10,
+    marginLeft: 5,
+    marginRight: 20,
     fontSize: 14,
     fontWeight: 'bold',
-    color: '$666'
+    color: '$666',
+    cursor: 'default'
   }
 
   $logout = {

@@ -50,6 +50,8 @@ view Comment {
     borderRadius: 10,
     border: '3px solid rgba(68, 139, 134, 0.29)',
     cursor: 'pointer',
+    hover:{backgroundColor: 'rgba(68, 139, 134, 0.29)'}
+
   }
 
 }

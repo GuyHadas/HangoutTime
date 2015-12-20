@@ -11,12 +11,23 @@ window.login = (callback) => {
       console.log("Authenticated successfully with payload:", authData)
     }
   }, {
-    remember: "sessionOnly",
     scope: "public_profile, email, user_friends"
   })
 }
 
+
 window.logout = () => {
+  let userRef = ref.child('users').child(authData.uid)
+  let sessionRef = userRef.child('sessionPings').child(authToken)
+  sessionRef.remove()
+
+  userRef.child('sessionPings').once('value', sessionPingsSnapshot => {
+    let sessionPings = sessionPingsSnapshot.val()
+    if (!sessionPings) {
+      userRef.child('isInArena').set(false)
+    }
+  })
+
   ref.unauth()
 }
 
@@ -27,10 +38,13 @@ view Main {
     return Math.floor(Math.random() * (max - min) + min)
   }
 
-
   ref.onAuth(authData => {
     if(authData) {
+      window.authData = ref.getAuth()
+
       let userRef = ref.child('users').child(authData.uid)
+
+      window.authToken = ((authData.token).replace(/[.#$/[]/g, "")).slice(-10, authData.token.length)
 
       const newUserFields = {
         email: authData.facebook.email || null,
@@ -38,7 +52,7 @@ view Main {
         photoUrl: authData.facebook.profileImageURL,
         facebookProfileUrl: authData.facebook.cachedUserProfile.link,
         xPos: getRandomInt(0, 2000),
-        yPos: getRandomInt(50, 1000)
+        yPos: getRandomInt(50, 1000),
       }
 
       authUser = Object.assign({uid: authData.uid}, newUserFields)
@@ -49,7 +63,13 @@ view Main {
           // New user
           userFields.createdTimestamp = Firebase.ServerValue.TIMESTAMP
         }
+        if (!userFields.sessionPings) {
+          // First session
+          userFields['sessionPings'] = {}
+        }
         userFields.seenTimestamp = Firebase.ServerValue.TIMESTAMP
+        userFields.sessionPings[authToken] = Firebase.ServerValue.TIMESTAMP
+
         return userFields
       })
       userRef.on('value', data => {
@@ -61,6 +81,8 @@ view Main {
 
 
   })
+
+
 
   <Navbar authUser={authUser}/>
   <HangoutMap authUser={authUser}/>

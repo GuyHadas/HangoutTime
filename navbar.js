@@ -10,7 +10,8 @@ view Navbar {
     height: 50,
     position: 'fixed',
     zIndex: 1,
-    width: '100%'
+    width: '100%',
+    borderBottom: '1px solid black'
   }
 
   $Comment = {
