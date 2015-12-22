@@ -4,26 +4,11 @@ view HangoutMap {
   //of the keys of sessionPings and updates serverValue.TIMESTAMP every 3 seconds.
   on.every(3000, () => {
     if (view.props.authUser) {
-      sessionsRef = ref.child('users').child(view.props.authUser.uid).child('sessionPings').child(authToken)
+      let sessionsRef = ref.child('users').child(view.props.authUser.uid).child('sessionPings').child(authToken)
       sessionsRef.set(Firebase.ServerValue.TIMESTAMP)
-
-      isInArenaRef = ref.child('users').child(view.props.authUser.uid).child('isInArena')
-      isInArenaRef.set(true)
     }
   })
 
-
-  on.every(10000, () => {
-    if (view.props.authUser) {
-      sessionRef = ref.child('users').child(view.props.authUser.uid).child('sessionPings').child(authToken)
-      sessionRef.once("value", sessionSnapshot => {
-        lastPing = sessionSnapshot.val()
-        if (Date.now() - lastPing > 10000) {
-          ref.child('users').child(view.props.authUser.uid).child('isInArena').set("false")
-        }
-      })
-    }
-  })
 
   <arena>
     <Avatar if={view.props.authUser} user={view.props.authUser}/>
@@ -40,6 +25,3 @@ view HangoutMap {
    }
 
 }
-
-
-//-img src={"/static/images/waterfallMap.jpg"}

@@ -2,23 +2,24 @@ view Comment {
   let displayFirstName = view.props.authUser.displayName.split(" ")[0]
   let comment = ""
 
+  let commentBox
 
   let submit = comment => {
     if (comment && view.props.authUser) {
       let userRef = ref.child('users').child(view.props.authUser.uid)
       userRef.update({comment: comment})
     }
-    view.refs.commentBox.focus()
+    commentBox.focus()
   }
 
   on.mount(() => {
-    view.refs.commentBox.focus()
+    commentBox.focus()
   })
 
 
   <wrapper>
     <commentBox-input
-    ref="commentBox"
+    ref={elem => commentBox = elem}
     type="text"
     maxLength="140"
     placeholder={`What\'s on your mind ${displayFirstName}?`}
