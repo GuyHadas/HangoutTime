@@ -5,14 +5,11 @@ view Avatar {
   const avatarWidth = 75
   const avatarHeight = 75
 
-  let uid = view.props.user.uid
-
-  let userRef = ref.child('users').child(uid).on("value", (userSnapshot) => {
-    user = userSnapshot.val()
-    x = user.xPos
-    y = user.yPos
-    avatarPic = user.photoUrl
-    comment = user.comment
+  on.props(() => {
+    x = view.props.user.xPos
+    y = view.props.user.yPos
+    avatarPic = view.props.user.photoUrl
+    comment = view.props.user.comment
   })
 
   <avatarBuilder>

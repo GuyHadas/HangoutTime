@@ -15,14 +15,16 @@ window.login = (callback) => {
   })
 }
 
-// window.isInArena = sessionPings => {
-//   // loop through the sessions and if at least one of the sessions has a
-//   // lastPing that was at most 10000 ms ago then return true, else return false
-//   let inArena = false
-//   for (let sessionId in sessionPings) {
-//     console.log(sessionPings[sessionId])
-//   }
-// }
+window.isInArena = sessionPings => {
+  // loop through the sessions and if at least one of the sessions has a
+  // lastPing that was at most 10000 ms ago then return true, else return false
+  for (let sessionId in sessionPings) {
+    if (Date.now() - sessionPings[sessionId] < 10000) {
+      return true
+    }
+  }
+  return false
+}
 
 
 window.logout = () => {
@@ -41,9 +43,9 @@ view Main {
   let authUser
   let userRef
 
-  // const userHandler = (userSnapshot) => {
-  //   Object.assign(authUser, userSnapshot.val())
-  // }
+  const userHandler = (userSnapshot) => {
+    Object.assign(authUser, userSnapshot.val())
+  }
 
   const getRandomInt = (min, max) => {
     return Math.floor(Math.random() * (max - min) + min)
@@ -83,15 +85,12 @@ view Main {
 
         return userFields
       })
-      userRef.on('value', data => {
-        Object.assign(authUser, data.val())
-      })
-      // userRef.on('value', userHandler)
+      userRef.on('value', userHandler)
     } else {
       authUser = null
-      // if (userRef) {
-      //   userRef.off('value', userHandler)
-      // }
+      if (userRef) {
+        userRef.off('value', userHandler)
+      }
     }
   })
 
