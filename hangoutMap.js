@@ -1,9 +1,9 @@
 view HangoutMap {
-  let sessionPings
-  let activeUsers
-  let user
-  //Checks to make sure that sessionPings exists, if it does it goes through all
-  //of the keys of sessionPings and updates serverValue.TIMESTAMP every 3 seconds.
+  let sessionPings, activeUsers, user
+  let xVal, yVal
+
+  const moveSpeed = 15
+
   on.every(3000, () => {
     if (view.props.authUser) {
       let sessionsRef = ref.child('users').child(view.props.authUser.uid).child('sessionPings').child(authToken)
@@ -11,8 +11,54 @@ view HangoutMap {
     }
   })
 
+  if (view.props.authUser) {
+    const userXRef = ref.child('users').child(view.props.authUser.uid).child('xPos')
+    const userYRef = ref.child('users').child(view.props.authUser.uid).child('yPos')
 
-  on.props(() => {
+    userXRef.once("value", userXSnapshot => {
+      xVal = userXSnapshot.val()
+    })
+
+    userYRef.once("value", userYSnapshot => {
+      yVal = userYSnapshot.val()
+    })
+
+    const onArrowKeyDown = e => {
+      if (e.keyCode == 39) {
+        e.preventDefault()
+        if (xVal < 1835) {
+          xVal += moveSpeed
+          userXRef.set(xVal)
+        }
+      }
+      else if (e.keyCode == 37) {
+        e.preventDefault()
+        if (xVal > 65) {
+          xVal -= moveSpeed
+          userXRef.set(xVal)
+        }
+      }
+      else if (e.keyCode == 38) {
+        e.preventDefault()
+        if (yVal > 23) {
+          yVal -= moveSpeed
+          userYRef.set(yVal)
+        }
+      }
+      else if (e.keyCode == 40) {
+        e.preventDefault()
+        if (yVal < 800) {
+          yVal += moveSpeed
+          userYRef.set(yVal)
+        }
+      }
+    }
+
+    view.on.keydown(onArrowKeyDown)
+  }
+
+
+  on.frame(() => {
     ref.child('users').once("value", usersSnapshot => {
       activeUsers = []
       usersSnapshot.forEach(userSnapshot => {
@@ -32,7 +78,7 @@ view HangoutMap {
   <arenaLoading if={activeUsers === undefined}> Arena is currently Loading </arenaLoading>
   <arenaEmpty if={activeUsers === null}>Arena is Empty</arenaEmpty>
   <arenaActive if={activeUsers && activeUsers.length > 0}>
-    <Avatar if={view.props.authUser} repeat={activeUsers} user={_}></Avatar>
+    <Avatar if={view.props.authUser}  repeat={activeUsers} user={_}></Avatar>
   </arenaActive>
 
   $arenaActive = {

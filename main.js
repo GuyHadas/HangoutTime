@@ -64,8 +64,8 @@ view Main {
         displayName: authData.facebook.displayName,
         photoUrl: authData.facebook.profileImageURL,
         facebookProfileUrl: authData.facebook.cachedUserProfile.link,
-        xPos: getRandomInt(0, 2000),
-        yPos: getRandomInt(50, 1000),
+        xPos: getRandomInt(50, 1848),
+        yPos: getRandomInt(50, 810),
       }
 
       authUser = Object.assign({uid: authData.uid}, newUserFields)
