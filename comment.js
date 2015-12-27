@@ -2,12 +2,14 @@ view Comment {
   let displayFirstName = view.props.authUser.displayName.split(" ")[0]
   let comment = ""
 
-  let submit = comment => {
-    if (comment && view.props.authUser) {
+  const submit = text => {
+    if (text && view.props.authUser) {
       let userRef = ref.child('users').child(view.props.authUser.uid)
-      userRef.update({comment: comment})
+      userRef.update({comment: text})
     }
     view.refs.commentBox.focus()
+    view.refs.commentBox.value = ""
+    comment = ""
   }
 
   on.mount(() => {

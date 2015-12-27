@@ -90,6 +90,14 @@ view HangoutMap {
     background: 'rgba(68, 139, 134, 0.29)',
    }
 
+   $arenaEmpty = {
+      position: 'absolute',
+      top: 50,
+      height: 1000,
+      width: 2000,
+      opacity: '0.8',
+      background: 'rgba(68, 139, 134, 0.29)',
+     }
    $arenaLoading = {
      position: 'absolute',
      top: 50,
