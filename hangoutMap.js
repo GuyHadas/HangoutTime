@@ -70,7 +70,7 @@ view HangoutMap {
 
   const backImages = [`url(/static/images/autumnTrees.jpg)`,
     `url(/static/images/kohPhiPhi.jpg)`,
-    `url(/static/images/sapaMountains.jpg)`,
+    // `url(/static/images/sapaMountains.jpg)`,
     `url(/static/images/blueHole.jpg)`,
     `url(/static/images/greatWallOfChina.jpg)`,
     `url(/static/images/halongBay.jpg)`,
@@ -80,17 +80,17 @@ view HangoutMap {
     `url(/static/images/deathValley.jpg)`,
     `url(/static/images/royceHall.jpg)`,
     `url(/static/images/niagaraFalls.jpg)`,
-    `url(/static/images/westernWall.jpg)`,
+    // `url(/static/images/westernWall.jpg)`,
     `url(/static/images/eiffelTower.jpg)`,
     `url(/static/images/bigBen.jpg)`,
-    `url(/static/images/shanghai.jpg)`,
+    // `url(/static/images/shanghai.jpg)`,
     `url(/static/images/burningManEmbrace.jpg)`,
     `url(/static/images/hongKong.jpg)`,
     `url(/static/images/patagoniaGlaciers.jpg)`,
-    `url(/static/images/torresDelPaine.jpg)`,
+    // `url(/static/images/torresDelPaine.jpg)`,
     `url(/static/images/goldenGateBridge.jpg)`,
-    `url(/static/images/telAviv.jpg)`,
-    `url(/static/images/sagradaFamilia.jpg)`,
+    // `url(/static/images/telAviv.jpg)`,
+    // `url(/static/images/sagradaFamilia.jpg)`,
     `url(/static/images/muiNeSandDunes.jpg)`,
     `url(/static/images/romeCollosseum.jpg)`,
     `url(/static/images/lakeTahoe.jpg)`,
@@ -114,6 +114,9 @@ view HangoutMap {
   <arenaActive if={activeUsers && activeUsers.length > 0}>
     <Avatar if={view.props.authUser}  repeat={activeUsers} user={_}></Avatar>
   </arenaActive>
+  <preFetchImages>
+    <img class="preFetchImage" repeat={backImages} src={_}/>
+  </preFetchImages>
 
  $ = {
    position: 'absolute',
@@ -124,6 +127,12 @@ view HangoutMap {
    backgroundImage: backImage,
    backgroundSize: '100% 100%',
    transition: 'background-image 5s',
+  }
+
+  $preFetchImage = {
+    width: 1,
+    height: 1,
+    opacity: 0,
   }
 
 
