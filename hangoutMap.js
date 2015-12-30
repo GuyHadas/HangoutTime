@@ -73,38 +73,63 @@ view HangoutMap {
     })
   })
 
+  const backImages = [`url(/static/images/autumnTrees.jpg)`,
+    `url(/static/images/kohPhiPhi.jpg)`,
+    `url(/static/images/sapaMountains.jpg)`,
+    `url(/static/images/blueHole.jpg)`,
+    `url(/static/images/greatWallOfChina.jpg)`,
+    `url(/static/images/halongBay.jpg)`,
+    `url(/static/images/angkorWat.jpg)`,
+    `url(/static/images/fullMoonParty.jpg)`,
+    `url(/static/images/luangPrabang.jpg)`,
+    `url(/static/images/deathValley.jpg)`,
+    `url(/static/images/royceHall.jpg)`,
+    `url(/static/images/niagaraFalls.jpg)`,
+    `url(/static/images/westernWall.jpg)`,
+    `url(/static/images/eiffelTower.jpg)`,
+    `url(/static/images/bigBen.jpg)`,
+    `url(/static/images/shanghai.jpg)`,
+    `url(/static/images/burningManEmbrace.jpg)`,
+    `url(/static/images/hongKong.jpg)`,
+    `url(/static/images/patagoniaGlaciers.jpg)`,
+    `url(/static/images/torresDelPaine.jpg)`,
+    `url(/static/images/goldenGateBridge.jpg)`,
+    `url(/static/images/telAviv.jpg)`,
+    `url(/static/images/sagradaFamilia.jpg)`,
+    `url(/static/images/muiNeSandDunes.jpg)`,
+    `url(/static/images/romeCollosseum.jpg)`,
+    `url(/static/images/lakeTahoe.jpg)`,
+    `url(/static/images/chiangMai.jpg)`,
+  ]
 
+  let imageNum = 0
+  let backImage = backImages[imageNum]
 
-  <arenaLoading if={activeUsers === undefined}> Arena is currently Loading </arenaLoading>
-  <arenaEmpty if={activeUsers === null}>Arena is Empty</arenaEmpty>
+  on.every(30000, () => {
+    if (imageNum < backImages.length - 1) {
+      imageNum += 1
+    } else {
+      imageNum = 0
+    }
+    backImage = backImages[imageNum]
+  })
+
+  <arenaLoading if={activeUsers === undefined}></arenaLoading>
+  <arenaEmpty if={activeUsers === null}></arenaEmpty>
   <arenaActive if={activeUsers && activeUsers.length > 0}>
     <Avatar if={view.props.authUser}  repeat={activeUsers} user={_}></Avatar>
   </arenaActive>
 
-  $arenaActive = {
-    position: 'absolute',
-    top: 50,
-    height: 1000,
-    width: 2000,
-    opacity: '0.8',
-    background: 'rgba(68, 139, 134, 0.29)',
-   }
+ $ = {
+   position: 'absolute',
+   top: 50,
+   height: 1000,
+   width: 2000,
+   opacity: '0.85',
+   backgroundImage: backImage,
+   backgroundSize: '100% 100%',
+   transition: 'background-image 5s',
+  }
 
-   $arenaEmpty = {
-      position: 'absolute',
-      top: 50,
-      height: 1000,
-      width: 2000,
-      opacity: '0.8',
-      background: 'rgba(68, 139, 134, 0.29)',
-     }
-   $arenaLoading = {
-     position: 'absolute',
-     top: 50,
-     height: 1000,
-     width: 2000,
-     opacity: '0.8',
-     background: 'rgba(68, 139, 134, 0.29)',
-    }
 
 }
