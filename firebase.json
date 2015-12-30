@@ -1,0 +1,9 @@
+{
+  "firebase": "hangouttime",
+  "public": ".flint/build",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
