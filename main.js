@@ -97,7 +97,7 @@ view Main {
 
 
   <Navbar authUser={authUser}/>
-  <HangoutMap authUser={authUser}/>
+  <HangoutMap key={authUser && authUser.uid} authUser={authUser}/>
 
 
 }

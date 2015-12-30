@@ -1,6 +1,8 @@
 view HangoutMap {
   let sessionPings, activeUsers, user
   let xVal, yVal
+  let userRef
+
 
   const moveSpeed = 15
 
@@ -12,44 +14,33 @@ view HangoutMap {
   })
 
   if (view.props.authUser) {
-    const userXRef = ref.child('users').child(view.props.authUser.uid).child('xPos')
-    const userYRef = ref.child('users').child(view.props.authUser.uid).child('yPos')
-
-    userXRef.once("value", userXSnapshot => {
-      xVal = userXSnapshot.val()
-    })
-
-    userYRef.once("value", userYSnapshot => {
-      yVal = userYSnapshot.val()
-    })
+    userRef = ref.child('users').child(view.props.authUser.uid)
+    xVal = view.props.authUser.xPos
+    yVal = view.props.authUser.yPos
 
     const onArrowKeyDown = e => {
       if (e.keyCode == 39) {
         e.preventDefault()
         if (xVal < 1835) {
-          xVal += moveSpeed
-          userXRef.set(xVal)
+          setPosition(xVal + moveSpeed, yVal)
         }
       }
       else if (e.keyCode == 37) {
         e.preventDefault()
         if (xVal > 65) {
-          xVal -= moveSpeed
-          userXRef.set(xVal)
+          setPosition(xVal - moveSpeed, yVal)
         }
       }
       else if (e.keyCode == 38) {
         e.preventDefault()
         if (yVal > 23) {
-          yVal -= moveSpeed
-          userYRef.set(yVal)
+          setPosition(xVal, yVal - moveSpeed)
         }
       }
       else if (e.keyCode == 40) {
         e.preventDefault()
         if (yVal < 800) {
-          yVal += moveSpeed
-          userYRef.set(yVal)
+          setPosition(xVal, yVal + moveSpeed)
         }
       }
     }
@@ -57,21 +48,25 @@ view HangoutMap {
     view.on.keydown(onArrowKeyDown)
   }
 
+  const setPosition = (newX, newY) => {
+      xVal = newX
+      yVal = newY
+      userRef.update({xPos: xVal, yPos: yVal})
+  }
 
-  on.frame(() => {
-    ref.child('users').once("value", usersSnapshot => {
-      activeUsers = []
-      usersSnapshot.forEach(userSnapshot => {
-        user = userSnapshot.val()
-        if(isInArena(user.sessionPings)) {
-          activeUsers.push(user)
-        }
-      })
-      if (activeUsers.length == 0) {
-        activeUsers = null
+  ref.child('users').on("value", usersSnapshot => {
+    activeUsers = []
+    usersSnapshot.forEach(userSnapshot => {
+      user = userSnapshot.val()
+      if(isInArena(user.sessionPings)) {
+        activeUsers.push(user)
       }
     })
+    if (activeUsers.length == 0) {
+      activeUsers = null
+    }
   })
+
 
   const backImages = [`url(/static/images/autumnTrees.jpg)`,
     `url(/static/images/kohPhiPhi.jpg)`,
