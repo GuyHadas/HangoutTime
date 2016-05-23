@@ -1,0 +1,12 @@
+{
+  "main": "index.js",
+  "name": "",
+  "license": "",
+  "author": "",
+  "private": true,
+  "dependencies": {
+    "firebase": "^2.4.2",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0"
+  }
+}

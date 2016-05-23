@@ -1,9 +1,10 @@
 {
   "firebase": "hangouttime",
-  "public": ".flint/build",
+  "public": ".motion",
   "ignore": [
     "firebase.json",
     "**/.*",
     "**/node_modules/**"
-  ]
+  ],
+  "rewrites": [{"source": "**", "destination": "/index.html"}],
 }
