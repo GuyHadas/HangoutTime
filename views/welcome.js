@@ -1,31 +1,34 @@
 import React from 'react'
+import ReactPlayer from 'react-player'
 
 export default class Welcome extends React.Component {
   render() {
     return (
       <welcome
         style={{
-          borderRadius: 20,
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: 5,
           padding: 20,
-          backgroundColor: 'white'
+          backgroundColor: 'rgba(146, 227, 209, .9)',
+          boxShadow: '0px 6px 20px 0px rgba(0,0,0,0.75)',
         }}
       >
-        <message
+        <header
           style={{
             fontSize: 24,
-            marginBottom: 8
+            fontFamily: 'Helvetica-Neue',
+            marginBottom: 15,
+            color: "black"
           }}
         >
-          Welcome to Hangout Time!
-        </message>
-        <iframe
-          style={{
-            width: 420,
-            height: 315
-          }}
-          src="https://www.youtube.com/embed/g-zCt8DPs3E"
-          frameborder="0"
-          allowfullscreen
+        Watch below to see HangoutTime in action!
+        </header>
+
+
+        <ReactPlayer
+          url='https://player.vimeo.com/video/167927767'
         />
       </welcome>
     )

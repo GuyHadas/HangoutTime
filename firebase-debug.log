@@ -1,0 +1,17 @@
+[debug] ----------------------------------------------------------------------
+[debug] Command:      /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] Platform:     darwin
+[debug] Node Version: v5.1.0
+[debug] Time:         Tue May 24 2016 12:12:42 GMT-0700 (PDT)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/firebase/hangouttime/token?token=XXX 
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/firebase/hangouttime/token?token=XXX 
+[debug] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'hangouttime'...
+[info] 
+[info] i  deploying hosting
+[info] i  preparing .motion directory for upload...
+[debug] >>> HTTP REQUEST PUT https://deploy.firebase.com/firebase/hangouttime/uploads/-KIZAjKVMrV0EvX7Tndd?token=XXX&fileCount=39&message= 
